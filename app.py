@@ -76,18 +76,23 @@ def clean_ics():
     new_cal = Calendar()
 
     for ev in cal.events:
-        new_ev = Event()
-        new_ev.begin = ev.begin
-        new_ev.end = ev.end
-        new_ev.location = ev.location
-        new_ev.description = ev.description
+    # 🛑 Filtrer les événements à supprimer
+    if ev.name and "sport du jeudi activités différées" in ev.name.lower():
+        continue  # on saute cet événement
 
-        if ev.name:
-            #clean_name = re.sub(r"^\s*\S+\s*-\s*", "", ev.name)
-            clean_name = re.sub(r"^\s*N5\S*\s*-\s*", "", ev.name)
+    new_ev = Event()
+    new_ev.begin = ev.begin
+    new_ev.end = ev.end
+    new_ev.location = ev.location
+    new_ev.description = ev.description
 
-            new_ev.name = clean_name.strip()
-        new_cal.events.add(new_ev)
+    if ev.name:
+        # Supprime le mot commençant par N5 et le tiret suivant
+        clean_name = re.sub(r"^\s*N5\S*\s*-\s*", "", ev.name)
+        new_ev.name = clean_name.strip()
+
+    new_cal.events.add(new_ev)
+
 
     response = Response(str(new_cal), mimetype="text/calendar")
     response.headers["Content-Disposition"] = "attachment; filename=clean.ics"
@@ -96,3 +101,4 @@ def clean_ics():
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+
