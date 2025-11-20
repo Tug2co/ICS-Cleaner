@@ -29,10 +29,6 @@ HTML_PAGE = """
     <input type="text" name="url" placeholder="https://..." required>
     <button type="submit">Nettoyer et télécharger</button>
   </form>
-  <div class="msg">
-    <p>💡 Exemple :<br>
-    https://edt.inp-toulouse.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=1862&projectId=71&calType=ical&firstDate=2025-08-01&lastDate=2026-07-15</p>
-  </div>
 </body>
 </html>
 """
@@ -101,5 +97,6 @@ def clean_ics():
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+
 
 
