@@ -70,10 +70,12 @@ def clean_ics():
         return f"❌ Erreur lors du parsing ICS : {e}", 500
 
     new_cal = Calendar()
-
+    
     for ev in cal.events:
     # 🛑 Filtrer les événements à supprimer
-      if ev.name and "sport du jeudi activités différées" in ev.name.lower():
+
+      BLACKLIST = ["sport du jeudi activités différées"]
+      if ev.name and any(k in ev.name.lower() for k in BLACKLIST):
           continue  # on saute cet événement
   
       new_ev = Event()
@@ -83,7 +85,8 @@ def clean_ics():
       new_ev.description = ev.description
   
       if ev.name:
-          # Supprime le mot commençant par N5 et le tiret suivant
+          # Supprime le mot commençant par N5,6,7 et le tiret suivant
+          clean_name = re.sub(r"^\s*(?:N5\S*|N6\S*|N7\S*|N8\S*|N9\S*|N10\S*)\s*-\s*", "", ev.name)
           clean_name = re.sub(r"^\s*N5\S*\s*-\s*", "", ev.name)
           new_ev.name = clean_name.strip()
   
@@ -97,6 +100,7 @@ def clean_ics():
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+
 
 
 
