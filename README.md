@@ -220,23 +220,3 @@ if ev.name and any(k in ev.name.lower() for k in BLACKLIST):
 
 ---
 
-## Licence
-
-Choisis une licence pour ton dépôt (MIT recommandée pour petits projets open-source). Exemple `LICENSE` :
-
-```
-MIT License
-...
-```
-
----
-
-## Contact / Aide
-
-Si tu veux, je peux :
-
-* t’aider à préparer le dépôt GitHub (fichiers prêts à `git add`),
-* générer la commande `curl` de test encodée pour ton agenda INP Toulouse,
-* ajouter un cache simple (TTL) dans `app.py`.
-
-Dis‑moi ce que tu souhaites faire ensuite !
