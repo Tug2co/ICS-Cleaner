@@ -86,7 +86,9 @@ def clean_ics():
   
       if ev.name:
           # Supprime le mot commençant par N5,6,7 et le tiret suivant
-          clean_name = re.sub(r"^\s*(?:N5\S*|N6\S*|N7\S*|N8\S*|N9\S*|N10\S*)\s*-\s*", "", ev.name)
+          #clean_name = re.sub(r"^\s*(?:N5\S*|N6\S*|N7\S*|N8\S*|N9\S*|N10\S*)\s*-\s*", "", ev.name)
+          clean_name = re.sub(r"\s*(?:N5\S*|N7\S*|N8\S*|N9\S*|N10\S*|1\s*3EA\s*\(A\))\s*-\s*"," ",ev.name)
+        
           #clean_name = re.sub(r"^\s*N5\S*\s*-\s*", "", ev.name)
           new_ev.name = clean_name.strip()
   
@@ -100,6 +102,7 @@ def clean_ics():
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+
 
 
 
